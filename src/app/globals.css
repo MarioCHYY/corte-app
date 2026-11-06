@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* Paleta de corte (ver branding/marca.html) */
+@theme {
+  --color-ink: #121417;
+  --color-slate: #2a2e35;
+  --color-slate-2: #1b1e23;
+  --color-line: #33373f;
+  --color-lime: #c6f432;
+  --color-lime-dim: #9dc21f;
+  --color-coral: #ff5c5c;
+  --color-paper: #f2f2ee;
+  --color-mute: #9aa0a8;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+}
+
+/* los montos siempre con números del mismo ancho */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.6;
+}
+
+/* Animaciones del panel de entrar */
+@keyframes corte-pop {
+  0% { transform: scale(0.4); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes corte-shine {
+  0% { transform: translateX(0) skewX(-12deg); opacity: 1; }
+  100% { transform: translateX(400%) skewX(-12deg); opacity: 0; }
+}
+@keyframes corte-wiggle {
+  0%, 100% { transform: rotate(0); }
+  30% { transform: rotate(-8deg) scale(1.08); }
+  60% { transform: rotate(6deg); }
+}
+
+/* Tutorial de instalación: anillo que señala dónde tocar */
+@keyframes install-pulse {
+  0% { opacity: 0.9; transform: scale(0.9); }
+  70% { opacity: 0; transform: scale(1.25); }
+  100% { opacity: 0; transform: scale(1.25); }
+}
+.install-pulse { animation: install-pulse 1.6s ease-out infinite; }
+@keyframes cell-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.92); }
+  to { opacity: 1; transform: none; }
+}
+.cell-in { animation: cell-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: calc(var(--i, 0) * 35ms); }
+@media (prefers-reduced-motion: reduce) {
+  .install-pulse, .cell-in { animation: none !important; }
+}
