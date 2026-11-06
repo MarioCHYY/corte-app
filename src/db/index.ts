@@ -26,6 +26,11 @@ async function connect(): Promise<DB> {
     await migrate(db, { migrationsFolder: MIGRATIONS });
     return db as DB;
   }
+  if (process.env.VERCEL) {
+    throw new Error(
+      "Falta DATABASE_URL: conecta una base de datos PostgreSQL (por ejemplo Neon) en Vercel."
+    );
+  }
   const { PGlite } = await import("@electric-sql/pglite");
   const { drizzle } = await import("drizzle-orm/pglite");
   const { migrate } = await import("drizzle-orm/pglite/migrator");
